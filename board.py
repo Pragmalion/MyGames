@@ -1,5 +1,3 @@
-import pygame
-
 from const import *
 from board_dim import BoardDim
 
