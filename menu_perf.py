@@ -1,5 +1,5 @@
 import sys
-from ready import Text
+from text import Text
 from const import *
 
 
@@ -11,11 +11,11 @@ def button(x, y,
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     if x + width > mouse[0] > x and y + height > mouse[1] > y:
-        pygame.draw.rect(screen, active_colour, (x, y, width, height))
+        pygame.draw.rect(screen, active_colour, (x+1, y, width, height))
         if click[0] and action is not None:
             action(screen)
     else:
-        pygame.draw.rect(screen, inactive_colour, (x, y, width, height))
+        pygame.draw.rect(screen, inactive_colour, (x+1, y, width, height))
 
 
 def exit(screen):
@@ -23,11 +23,11 @@ def exit(screen):
     pygame.quit()
     quit()
 
-
+pygame.display.set_caption('Menu of MEGA TIC TAC TOE')
 def main_menu(screen, game_action=None, rules_action=None):
     black = 0, 0, 0
-    blue = 0, 0, 255
-    bright_blue = 0, 0, 150
+    blue = 0, 191, 225
+    bright_blue = 0, 0, 0
 
     game_over = False
 
@@ -36,31 +36,25 @@ def main_menu(screen, game_action=None, rules_action=None):
     text_object0.update_position(size[0] / 2 - text_size[0] / 2,
                                  (size[1] - 425 - text_size[1] / 2) - 200)
 
-    text_object01 = Text("в Мега крестики-нолки!", 40)
+    text_object01 = Text("в Мега крестики-нолики!", 40)
     text_size = text_object01.get_text_size()
     text_object01.update_position(size[0] / 2 - text_size[0] / 2,
                                  (size[1] - 425 - text_size[1] / 2) - 120)
 
-    text_object1 = Text("PLAY", 30)
+    text_object1 = Text("PLAY", 80)
     text_size = text_object1.get_text_size()
-    btn1 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 425,
-            text_size[0], text_size[1])
-    text_object1.update_position(size[0] / 2 - text_size[0] / 2,
-                                 size[1] - 425 - text_size[1] / 2)
+    btn1 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 400, text_size[0], text_size[1])
+    text_object1.update_position(size[0] / 2 - text_size[0] / 2, (size[1] - 400 - text_size[1] / 2))
 
-    text_object2 = Text("RULES", 30)
+    text_object2 = Text("RULES", 50)
     text_size = text_object2.get_text_size()
-    btn2 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 350,
-            text_size[0], text_size[1])
-    text_object2.update_position(size[0] / 2 - text_size[0] / 2,
-                                 size[1] - 350 - text_size[1] / 2)
+    btn2 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 150, text_size[0], text_size[1] )
+    text_object2.update_position(size[0] / 2 - text_size[0] / 2, (size[1] - 150 - text_size[1] / 2) )
 
-    text_object3 = Text("EXIT", 30)
+    text_object3 = Text("EXIT", 50)
     text_size = text_object3.get_text_size()
-    btn3 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 275,
-            text_size[0], text_size[1])
-    text_object3.update_position(size[0] / 2 - text_size[0] / 2,
-                                 size[1] - 275 - text_size[1] / 2)
+    btn3 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 50, text_size[0], text_size[1] )
+    text_object3.update_position(size[0] / 2 - text_size[0] / 2, (size[1] - 50 - text_size[1] / 2) )
 
     while not game_over:
         for event in pygame.event.get():
