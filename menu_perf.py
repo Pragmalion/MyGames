@@ -27,7 +27,7 @@ pygame.display.set_caption('Menu of MEGA TIC TAC TOE')
 def main_menu(screen, game_action=None, rules_action=None):
     black = 0, 0, 0
     blue = 0, 191, 225
-    bright_blue = 0, 0, 0
+    bright_blue = 105, 105, 105
 
     game_over = False
 
@@ -44,17 +44,17 @@ def main_menu(screen, game_action=None, rules_action=None):
     text_object1 = Text("PLAY", 80)
     text_size = text_object1.get_text_size()
     btn1 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 400, text_size[0], text_size[1])
-    text_object1.update_position(size[0] / 2 - text_size[0] / 2, (size[1] - 400 - text_size[1] / 2))
+    text_object1.update_position( (size[0] / 2 - text_size[0]  / 2) + 7, (size[1] - 400 - text_size[1] / 2))
 
     text_object2 = Text("RULES", 50)
     text_size = text_object2.get_text_size()
     btn2 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 150, text_size[0], text_size[1] )
-    text_object2.update_position(size[0] / 2 - text_size[0] / 2, (size[1] - 150 - text_size[1] / 2) )
+    text_object2.update_position( (size[0] / 2 - text_size[0] / 2) + 4, (size[1] - 150 - text_size[1] / 2) )
 
     text_object3 = Text("EXIT", 50)
     text_size = text_object3.get_text_size()
     btn3 = (size[0] / 2 - text_size[0] / 2, size[1] - text_size[1] / 2 - 50, text_size[0], text_size[1] )
-    text_object3.update_position(size[0] / 2 - text_size[0] / 2, (size[1] - 50 - text_size[1] / 2) )
+    text_object3.update_position( (size[0] / 2 - text_size[0] / 2) + 4, (size[1] - 50 - text_size[1] / 2) )
 
     while not game_over:
         for event in pygame.event.get():
