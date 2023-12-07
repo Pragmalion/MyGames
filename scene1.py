@@ -1,7 +1,6 @@
 import pygame
 from pygame import *
 
-from scene2 import scene_2
 from const import *
 
 from main import Main
@@ -11,12 +10,20 @@ pygame.init()
 
 screen = display.set_mode( size )
 ARIAL_50 = font.SysFont('arial', 80)
+image_back = pygame.image.load("fire.jpg")
+
+class Main2:
+    def start_game(self):
+        main = Main()
+        main.mainloop()
+main2 = Main2()
 
 class Scene1:
     def __init__(self):
         self._option_surfaces = []
         self._callbacks = []
         self._current_options_index = 0
+        pygame.display.set_caption('Menu of MEGA TIC TAC TOE')
 
 
     # Добавление опций
@@ -44,11 +51,11 @@ class Scene1:
                 draw.rect(surf, (48, 213, 200), option_rect)
             surf.blit(option, option_rect)
 
-
-class Main2:
-    def start_game(self):
-        main = Main()
-        main.mainloop()
+    # Показ меню пользователю
+    def show_menu(self):
+        menu.append_options('Play', main2.start_game)
+        # menu.append_options('Rules', scene_2)
+        menu.append_options('Quit', quit)
 
     def print_text(self):
     # Создание объекта текста
@@ -62,22 +69,19 @@ class Main2:
 
         # Отображение первого текста на экране
         text_rect = text.get_rect()
-        text_rect.center = (size[0] // 2, size[1] - (size[1] - 30))  # Расположение текста на экране
+        text_rect.center = (size[0] // 2, size[1] - (size[1] - 50))  # Расположение текста на экране
         screen.blit(text, text_rect)
 
         # Отображение второго текста на экране
         text2_rect = text.get_rect()
-        text2_rect.center = (size[0] // 2 + 8, size[1] - (size[1] - 70))
+        text2_rect.center = (size[0] // 2 + 8, size[1] - (size[1] - 90))
         screen.blit(text2, text2_rect)
 
 
-main2 = Main2()
+
+
 menu = Scene1()
-
-menu.append_options('Play', main2.start_game)
-menu.append_options('Rules', scene_2)
-menu.append_options('Quit', quit)
-
+menu.show_menu()
 
 running = True
 while running:
@@ -91,11 +95,12 @@ while running:
                 menu.switch(1)
             elif e.key == K_e:
                 menu.select()
+
+
     screen.fill((0, 0, 0))
-    main2.print_text()
-    # image = pygame.image.load("fire.jpg")
-    # screen.blit(image, (800, 600))
-    menu.draw_menu(screen, 318, 128, 170)
+    screen.blit(image_back, (0, 0))
+    menu.print_text()
+    menu.draw_menu(screen, 318, 200, 170)
     display.flip()
 
 quit()
