@@ -8,7 +8,6 @@ from rules import rules_table
 
 
 def mainloop(screen):
-    #screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('MEGA TIC TAC TOE')
     game = Game(ultimate=True, max=False)
 
@@ -22,8 +21,8 @@ def mainloop(screen):
     marked = []
     draw_fields = []
 
-
-    while True:
+    running = True
+    while running:
 
         for event in pygame.event.get():
             # клик
@@ -38,7 +37,6 @@ def mainloop(screen):
                     available_xfields = range(0, 729)
                     available_yfields = range(0, 729)
 
-                    #в is_draw() посмотреть что не так с добавлением сыгранных полей
                     played_ypos = game.board.get_yplayed_positions()
                     played_xpos = game.board.get_xplayed_positions()
 
@@ -51,7 +49,7 @@ def mainloop(screen):
                     if (played_xpos[i] in available_xfields and played_ypos[i] in available_yfields):
                         available_xfields = range(0, 729)
                         available_yfields = range(0, 729)
-
+            
                 if xclick not in available_xfields:
                     break
                 if yclick not in available_yfields:
@@ -83,15 +81,18 @@ def mainloop(screen):
 
                     game.next_turn()
 
-            # keypress
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
+                    available_xfields = range(0, 729)
+                    available_yfields = range(0, 729)
                     game.restart()
                     screen.fill( BG_COLOR )
                     game.render_board(screen)
                 elif event.key == pygame.K_q:
-                    pygame.quit()
-                    sys.exit()
+                    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+                    main_menu(screen, mainloop, rules_table)
+                    #pygame.quit()
+                    #sys.exit()
 
             # quit
             if event.type == pygame.QUIT:
@@ -99,7 +100,6 @@ def mainloop(screen):
                 sys.exit()
 
         pygame.display.update()
-
 
 if __name__ == '__main__':
     pygame.init()
